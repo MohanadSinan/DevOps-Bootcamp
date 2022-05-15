@@ -1,0 +1,129 @@
+[Code Snippet 1]
+
+In line 4 -> calling the function hello -> the output is 'hello'
+In line 5 -> the output is 'Dojo'
+
+
+[Code Snippet 2]
+
+In line 5 -> the variable result is calling the function hello -> the output is 'hello'
+In line 6 -> the output is 'result is 15'
+
+	Variable	|	Values
+-------------------------------------
+	result	|	15
+			|   
+			|   
+			|   
+
+
+[Code Snippet 3]
+
+In line 5 -> the variable result is calling the function numPlus with the parameter 3 -> the output is 'num is 3'
+In line 6 -> the output is 'x is 18'
+
+	Variable	|	Values
+-------------------------------------
+	num		|	3
+	result	|	3+5 => 18
+			|   
+			|   
+
+
+[Code Snippet 4]
+
+In line 1 -> the variable num is 15
+In line 2 -> the output is 15
+In line 7 -> the variable result is calling the function logAndReturn with the parameter 10 -> the output is 10
+In line 8 -> the output is 10
+In line 9 -> the output is 15
+
+	Variable	|	Values
+------------------------------------------
+	num		|	15 -> 10 --> 15
+	result	|	10
+			|   
+			|   
+
+
+[Code Snippet 5]
+
+In line 1 -> the variable num is 15
+In line 2 -> the output is 15
+In line 7 -> the variable result is calling the function timesTwo with the parameter 10 -> the output is 10
+In line 8 -> the output is 20
+In line 9 -> the output is 15
+
+	Variable	|	Values
+------------------------------------------
+	num		|	15 -> 10 --> 15
+	result	|	(10*2) => 20
+			|   
+			|   
+
+
+[Code Snippet 6]
+
+In line 6 -> the variable result is calling the function timesTwoAgain with the parameter 3 and then with the parameter 5 -> the output is 'num is 3' and 'num is 5'
+In line 7 -> the output is 'result is 16'
+
+	Variable	|	Values
+--------------------------------------------
+	num		|	3 -> 5
+	result	|	(3*2)+(5*2) => 16
+			|   
+			|   
+
+
+[Code Snippet 7]
+
+In line 4 -> calling the function sumNums with the parameters 2,3 -> the output is 5
+In line 5 -> calling the function sumNums with the parameters 3,5 -> the output is 8
+
+	Variable	|	Values
+-------------------------------------
+	num1		|	2 -> 3
+	num2		|	3 -> 5
+			|
+			|
+
+
+[Code Snippet 8]
+
+In line 5 -> calling the function printSumNums with the parameters 2,3 -> the output is 2,5
+In line 6 -> calling the function printSumNums with the parameters 3,5 -> the output is 3,8
+
+	Variable	|	Values
+-------------------------------------
+	num1		|	2 -> 3
+	num2		|	3 -> 5
+			|
+			|
+
+
+[Code Snippet 9]
+
+In line 6 -> the variable result is calling the function sumNums with the parameters 2,3 and then with the parameters 3,5 -> the output is 'sum is 5' and 'sum is 8'
+In line 7 -> the output is 'result is 13'
+
+	Variable	|	Values
+----------------------------------------------------
+	num1		|	2 -> 3
+	num2		|	3 -> 5
+	sum		|	(2+3) => 5 -> (3+5) => 8
+	result	|	(8+5) => 13
+			|
+
+
+[Code Snippet 10]
+
+In line 6 -> the variable result is calling the function sumNums as follows: sumNums(2,3) + sumNums(3,sumNums(2,1)) + sumNums(sumNums(2,1),sumNums(2,3)) -> the output is 'sum is 5' and 'sum is 3' and 'sum is 6' and 'sum is 3' and 'sum is 5' and 'sum is 8'
+In line 7 -> the output is 'result is 19'
+
+	Variable	|	Values
+----------------------------------------------------
+	num1		|	2 -> 2 -> 3 -> 2 -> 2 -> 3
+	num2		|	3 -> 1 -> 3 -> 1 -> 3 -> 5
+	sum		|	(2+3) => 5 -> (2+1) => 3 -> (3+3) => 6 -> (2+1) => 3 -> (2+3) => 5 -> (3+5) => 8 -> (3+5) => 8
+	result	|	(5+6+8) => 19
+			|
