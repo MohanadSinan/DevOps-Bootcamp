@@ -1,0 +1,28 @@
+[Code Snippet 1]
+
+	Variable		|	Values
+---------------------------------------------------------------------------------------------------
+	auntContactInfo	|	["Paula", "Smith", "1234 Main Street", "St. Louis", "MO", 12345]
+				|	
+				|	
+				|	
+
+
+[Code Snippet 2]
+
+	Variable		|	Values
+---------------------------------------------------------------------------------------------------
+	produce		|	["apples", "oranges"]
+	frozen		|	["broccoli", "ice cream"] -> ["broccoli", "ice cream", "hashbrowns"]
+				|   
+				|   
+
+
+[Code Snippet 3]
+
+	Variable		|	Values
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+	movieLibrary	|	["Bambi", "E.T.", "Toy Story"] -> ["Bambi", "E.T.", "Toy Story", "Zoro"] -> ["Bambi", "Beetlejuice", "Toy Story", "Zoro"]
+				| 
+				|   
+				| 
