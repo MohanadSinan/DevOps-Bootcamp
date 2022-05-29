@@ -1,13 +1,11 @@
 # EC2 Assignment
 
-**Muhannad Sinan**
-
 
 ## Step 1:
 
 > **Note:** To solve this, I used AWS Command Line Interface (AWS CLI) that runs on my windows machine.
 >
-> ![image-20220529204440560](C:\Users\MohanadSinan\AppData\Roaming\Typora\typora-user-images\image-20220529204440560.png)
+> ![image-20220529204440560](./img/image-20220529204440560.png)
 
 the following command line is to create an EC2 server using Amazon linux AMI (Image ID ami-0022f774911c1d690) with instance type (t2.micro) and the key pair (AZ-EC2) that I created earlier, and then I specify EBS volume with 20 GB.
 
@@ -141,7 +139,7 @@ $ aws ec2 run-instances
 }
 ```
 
-![image-20220529215245038](C:\Users\MohanadSinan\AppData\Roaming\Typora\typora-user-images\image-20220529215245038.png)
+![image-20220529215245038](./img/image-20220529215245038.png)
 
 Next, to be able to add SSH connection, I had to modify the security group rules that generated when I created the image. the group ID is (sg-0bae608cfe2776e82) but first I should find the security group rule ID.
 
@@ -203,7 +201,7 @@ $ aws ec2 modify-security-group-rules
 }
 ```
 
-![image-20220529215046124](C:\Users\MohanadSinan\AppData\Roaming\Typora\typora-user-images\image-20220529215046124.png)
+![image-20220529215046124](./img/image-20220529215046124.png)
 
 That's it, this is how I created an EC2 server using Amazon linux AMI of t2.micro type with 20 GB of EBS storage and giving it port 22 public access for SSH.
 
@@ -228,7 +226,7 @@ Output:
 }
 ```
 
-![image-20220529220049517](C:\Users\MohanadSinan\AppData\Roaming\Typora\typora-user-images\image-20220529220049517.png)
+![image-20220529220049517](./img/image-20220529220049517.png)
 
 
 
@@ -387,7 +385,7 @@ aws ec2 run-instances
 }
 ```
 
-![image-20220529220718856](C:\Users\MohanadSinan\AppData\Roaming\Typora\typora-user-images\image-20220529220718856.png)
+![image-20220529220718856](./img/image-20220529220718856.png)
 
 ------
 
@@ -395,7 +393,7 @@ aws ec2 run-instances
 
 > **Note:** To solve this , I used EC2 Instance Connect that running in Amazon linux AMI image I gust created.
 >
-> ![image-20220529221549052](C:\Users\MohanadSinan\AppData\Roaming\Typora\typora-user-images\image-20220529221549052.png)
+> ![image-20220529221549052](./img/image-20220529221549052.png)
 
 To install an Apache web server let's update the software on my instance by run the following command:
 
@@ -417,4 +415,4 @@ sudo nano index.html
 ```
 **Output:**
 
-<img src="C:\Users\MohanadSinan\AppData\Roaming\Typora\typora-user-images\image-20220529224104385.png" alt="image-20220529224104385" style="zoom: 67%;" />
+<img src="./img/image-20220529224104385.png" alt="image-20220529224104385" style="zoom: 67%;" />
