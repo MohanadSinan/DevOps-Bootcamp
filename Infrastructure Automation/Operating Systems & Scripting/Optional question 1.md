@@ -7,11 +7,11 @@
 >
 > ![image-20220529204440560](./img/image-20220529204440560.png)
 
-the following command line is to create an EC2 server using Amazon linux AMI (Image ID ami-0022f774911c1d690) in the (us-east-1) region with instance type (t2.micro) and the key pair (AZ-EC2) that I created earlier, and then I specify EBS volume with 20 GB.
+the following command line is to create an EC2 server using Ubuntu Server 22.04 LTS (Image ID ami-09d56f8956ab235b3) in the (us-east-1) region with instance type (t2.micro) and the key pair (AZ-EC2) that I created earlier, and then I specify EBS volume with 20 GB.
 
 ```shell
 $ aws ec2 run-instances
-        --image-id ami-0022f774911c1d690
+    --image-id ami-09d56f8956ab235b3
 	--instance-type t2.micro
 	--key-name AZ-EC2
 	--block-device-mappings 'DeviceName=/dev/xvda,Ebs={VolumeSize=20}'
@@ -26,8 +26,8 @@ $ aws ec2 run-instances
     "Instances": [
         {
             "AmiLaunchIndex": 0,
-            "ImageId": "ami-0022f774911c1d690",
-            "InstanceId": "i-058544eb66944eb66",
+            "ImageId": "ami-09d56f8956ab235b3",
+            "InstanceId": "i-07b6ceae5ed01ddec",
             "InstanceType": "t2.micro",
             "KeyName": "AZ-EC2",
             "LaunchTime": "2022-05-29T20:32:30+00:00",
@@ -39,8 +39,8 @@ $ aws ec2 run-instances
                 "GroupName": "",
                 "Tenancy": "default"
             },
-            "PrivateDnsName": "ip-172-31-19-118.ec2.internal",
-            "PrivateIpAddress": "172.31.19.118",
+            "PrivateDnsName": "ip-172-31-29-1.ec2.internal",
+            "PrivateIpAddress": "172.31.29.1",
             "ProductCodes": [],
             "PublicDnsName": "",
             "State": {
@@ -77,13 +77,13 @@ $ aws ec2 run-instances
                     "MacAddress": "0a:e8:05:6d:ef:4d",
                     "NetworkInterfaceId": "eni-02af1d98bb9a29709",
                     "OwnerId": "568935291733",
-                    "PrivateDnsName": "ip-172-31-19-118.ec2.internal",
-                    "PrivateIpAddress": "172.31.19.118",
+                    "PrivateDnsName": "ip-172-31-29-1.ec2.internal",
+                    "PrivateIpAddress": "172.31.29.1",
                     "PrivateIpAddresses": [
                         {
                             "Primary": true,
-                            "PrivateDnsName": "ip-172-31-19-118.ec2.internal",
-                            "PrivateIpAddress": "172.31.19.118"
+                            "PrivateDnsName": "ip-172-31-29-1.ec2.internal",
+                            "PrivateIpAddress": "172.31.29.1"
                         }
                     ],
                     "SourceDestCheck": true,
@@ -140,7 +140,7 @@ $ aws ec2 run-instances
 }
 ```
 
-![image-20220529233454078](./img/image-20220529233454078.png)
+![image-20220530000031577](./img/image-20220530000031577.png)
 
 Next, to be able to add SSH connection, I had to modify the security group rules that generated when I created the image. the group ID is (sg-0bae608cfe2776e82) but first I should find the security group rule ID.
 
@@ -217,21 +217,34 @@ That's it, this is how I created an EC2 server using Amazon linux AMI of t2.micr
 To install an NGINX let's update the software on my instance by run the following command:
 
 ```bash
-sudo yum update -y
+sudo apt-get update
 ```
 
 Now in order to install NGINX I should the following command:
 
 ```bash
- sudo amazon-linux-extras install nginx1
+ sudo apt-get install nginx -y
 ```
 
 Now let's check if NGINX is running
 
 ```bash
-cd /var/www/html
-sudo nano index.html
+ps auwx | grep nginx
 ```
 **Output:**
 
-![image-20220529234118644](./img/image-20220529234118644.png)
+![image-20220530000529958](./img/image-20220530000529958.png)
+
+![image-20220530000659965](./img/image-20220530000659965.png)
+
+Now let's go to the directory `/var/www/html` to replace **Welcome to nginx!** to **Welcome to DevOps!**
+
+```bash
+cd /var/www/html
+sudo nano index.nginx-debian.html
+```
+
+**Output:**
+
+![image-20220530001454894](./img/image-20220530001454894.png)
+
