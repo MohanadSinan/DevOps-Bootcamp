@@ -22,7 +22,8 @@ setfacl g:CodingDojo:rwx -R /Docker-Folder
 
 # [2]
 # Create a cron job that will run two times in an hour. (At minute 0 and 30 of every hour)
-corn 0,30 * * * * /fileName
+crontab -e
+0,30 * * * * /fileName.sh
 
 
 # [3]
