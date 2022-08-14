@@ -5,7 +5,7 @@
 
 > **Note:** To solve this, I used AWS Command Line Interface (AWS CLI) that runs on my windows machine.
 >
-> ![image-20220529204440560](./img/image-20220529204440560.png)
+> ![image-20220529204440560](./_img/image-20220529204440560.png)
 
 the following command line is to create an EC2 server using Ubuntu Server 22.04 LTS (Image ID ami-09d56f8956ab235b3) in the (us-east-1) region with instance type (t2.micro) and the key pair (AZ-EC2) that I created earlier, and then I specify EBS volume with 20 GB.
 
@@ -140,7 +140,7 @@ $ aws ec2 run-instances
 }
 ```
 
-![image-20220530000031577](./img/image-20220530000031577.png)
+![image-20220530000031577](./_img/image-20220530000031577.png)
 
 Next, to be able to add SSH connection, I had to modify the security group rules that generated when I created the image. the group ID is (sg-0bae608cfe2776e82) but first I should find the security group rule ID.
 
@@ -202,7 +202,7 @@ $ aws ec2 modify-security-group-rules
 }
 ```
 
-![image-20220529215046124](./img/image-20220529215046124.png)
+![image-20220529215046124](./_img/image-20220529215046124.png)
 
 That's it, this is how I created an EC2 server using Amazon linux AMI of t2.micro type with 20 GB of EBS storage and giving it port 22 public access for SSH.
 
@@ -212,7 +212,7 @@ That's it, this is how I created an EC2 server using Amazon linux AMI of t2.micr
 
 > **Note:** To solve this , I used EC2 Instance Connect that running in Amazon linux AMI image I gust created.
 >
-> ![image-20220529221549052](./img/image-20220529221549052.png)
+> ![image-20220529221549052](./_img/image-20220529221549052.png)
 
 To install an NGINX let's update the software on my instance by run the following command:
 
@@ -233,9 +233,9 @@ ps auwx | grep nginx
 ```
 **Output:**
 
-![image-20220530000529958](./img/image-20220530000529958.png)
+![image-20220530000529958](./_img/image-20220530000529958.png)
 
-![image-20220530000659965](./img/image-20220530000659965.png)
+![image-20220530000659965](./_img/image-20220530000659965.png)
 
 Now let's go to the directory `/var/www/html` to replace **Welcome to nginx!** to **Welcome to DevOps!**
 
@@ -246,5 +246,5 @@ sudo nano index.nginx-debian.html
 
 **Output:**
 
-![image-20220530001454894](./img/image-20220530001454894.png)
+![image-20220530001454894](./_img/image-20220530001454894.png)
 
