@@ -5,7 +5,7 @@ This bootcamp is designed to prepare students for a junior DevOps engineer posit
 
 Students will spend 16 weeks learning about DevOps, from tools to techniques, students will be able to interact with  some of the brightest minds in the industry in terms of instruction, ability to ask questions, and learn about technology, programming, and modern DevOps standards and practices.
 
-<img src="./_resources/_img/DevOps Bootcamp Timeline.jpg" alt="img" style="zoom:50%;" />
+<img src="./_resources/_img/DevOps Bootcamp Timeline.jpg" alt="img" style="zoom: 33%;" />
 
 ## The objective of the Program
 
