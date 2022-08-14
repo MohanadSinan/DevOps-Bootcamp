@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Belt Exam 1 Day 5
+
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: "AWS::EC2::KeyPair::KeyName"
+    Default: main
+  InstanceType:
+    Description: WebServer EC2 instance type
+    Type: String
+    Default: t3.micro
+    AllowedValues:
+      - t3.nano
+      - t3.micro
+      - t3.small
+      - t3.medium
+    ConstraintDescription: must be a valid EC2 instance type.
+  IPLocation:
+    Description: The IP address range that can be used to SSH to the EC2 instances
+    Type: String
+      MinLength: '9'
+      MaxLength: '18'
+      Default: 0.0.0.0/0
+      AllowedPattern: '(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})'
+      ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x
+
+Resources:
+  EC2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ami-0bf69afb300c322eb
+      InstanceType: !Ref InstanceType
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: !Ref KeyName
+      Tags:
+        - Key: BeltExam1
+          Value: Day 5
+        - Key: Type
+          Value: Amazon Linux 2
+  InstanceSecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: "22"
+          ToPort: "22"
+          CidrIp: 192.168.1.30/32
+        - IpProtocol: tcp
+          FromPort: "80"
+          ToPort: "80"
+          CidrIp: !Ref IPLocation
+
+Outputs:
+  AZname:
+    Description: The Availability Zone where the Amazon Linux 2 EC2 instance is launched
+    Value: !GetAtt EC2Instance.AvailabilityZone
+  PublicDNS:
+    Description: The public DNS name of the Amazon Linux 2 EC2 instance
+    Value: !GetAtt EC2Instance.PublicDnsName
+  PublicIP:
+    Description: The public IP address of the Amazon Linux 2 EC2 instance
+    Value: !GetAtt EC2Instance.PublicIp

@@ -1,0 +1,12 @@
+---
+  - hosts: loadbalancers
+    become: true
+    tasks:
+      - name: Creating template
+        copy:
+          src: ../config/lb.conf
+          dest: /etc/apache2/conf.d/
+          mode: 0755 
+
+      - name: restart apache
+        service: name=apache2 state=restarted 

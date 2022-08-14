@@ -1,0 +1,121 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Metadata:
+  License: Apache-2.0
+Description: "OPTIONAL Assignment 2 - Turning a Playbook Into a Role"
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: main
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+  InstanceType:
+    Description: WebServer EC2 instance type
+    Type: String
+    Default: t3.micro
+    AllowedValues: [t3.nano, t3.micro, t3.small, t3.medium]
+    ConstraintDescription: must be a valid EC2 instance type.
+  SSHLocation:
+    Description: The IP address range that can be used to SSH to the EC2 instances
+    Type: String
+    MinLength: 9
+    MaxLength: 18
+    Default: 0.0.0.0/0
+    AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
+    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
+  HTTPLocation:
+    Description: The IP address range that can be used to SSH to the EC2 instances
+    Type: String
+    MinLength: 9
+    MaxLength: 18
+    Default: 0.0.0.0/0
+    AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
+    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
+  LatestAmzLinuxAmiId:
+    Type: "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
+    Default: "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+  LatestUbuntuAmiId:
+    Type:  'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: '/aws/service/canonical/ubuntu/server/20.04/stable/current/amd64/hvm/ebs-gp2/ami-id'
+  InstanceCount:
+    Description: Number of EC2 instances (must be between 1 and 5).
+    Type: Number
+    Default: 1
+    MinValue: 1
+    MaxValue: 3
+    ConstraintDescription: Must be a number between 1 and 5.
+
+Resources:
+  MasterSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: ansbile-master-sg
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref "SSHLocation"
+
+  NodeSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: ansbile-node-sg
+      GroupDescription: Enable SSH access via port 22 and HTTP access via port 80
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref "SSHLocation"
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: !Ref "HTTPLocation"
+
+  EC2InstanceMaster:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref "InstanceType"
+      SecurityGroups: [!Ref "MasterSecurityGroup"]
+      KeyName: !Ref "KeyName"
+      ImageId: !Ref "LatestAmzLinuxAmiId"
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo amazon-linux-extras install ansible2 -y
+      Tags:
+        - Key: Name
+          Value: ansible-master
+  EC2InstanceNode1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref "InstanceType"
+      SecurityGroups: [!Ref "NodeSecurityGroup"]
+      KeyName: !Ref "KeyName"
+      ImageId: !Ref "LatestUbuntuAmiId"
+      Tags:
+        - Key: Name
+          Value: Node1
+  EC2InstanceNode2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref "InstanceType"
+      SecurityGroups: [!Ref "NodeSecurityGroup"]
+      KeyName: !Ref "KeyName"
+      ImageId: !Ref "LatestUbuntuAmiId"
+      Tags:
+        - Key: Name
+          Value: Node2
+
+Outputs:
+  AnsibleMasterPublicIP:
+    Description: Public IP address of the newly created Ansible master EC2 instance
+    Value: !GetAtt [EC2InstanceMaster, PublicIp]
+
+  Host1PublicIP:
+    Description: Public IP address of the newly created Ubuntu EC2 instance
+    Value: !GetAtt [EC2InstanceNode1, PublicIp]
+
+  Host2PublicIP:
+    Description: Public IP address of the newly created Ubuntu EC2 instance
+    Value: !GetAtt [EC2InstanceNode2, PublicIp]

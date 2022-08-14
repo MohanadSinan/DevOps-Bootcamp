@@ -1,0 +1,9 @@
+---
+  - hosts: webservers
+    become: true
+    tasks:
+      - name: Upload application file
+        copy:
+          src: ../config/index.html
+          dest: /var/www/html
+          mode: 0755

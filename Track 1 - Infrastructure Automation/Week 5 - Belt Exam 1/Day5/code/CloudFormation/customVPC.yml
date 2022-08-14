@@ -1,0 +1,129 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Belt Exam 1 Day 5 - creating a custom VPC, two ec2 servers, two security groups with bootstrap apache2 server
+
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: main
+
+Resources:
+  SampleVpc:
+    Type: AWS::EC2::VPC
+    Description: Sample VPC definition
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      Tags:
+        - Key: Name
+          Value: SampleVpc
+  SampleSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: 10.0.0.0/24
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref SampleVpc
+  SampleRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref SampleVpc
+  SampleInternetGateway:
+    Type: AWS::EC2::InternetGateway
+  SampleGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref SampleVpc
+      InternetGatewayId: !Ref SampleInternetGateway
+  InternetRoute:
+    Type: AWS::EC2::Route
+    DependsOn:
+      - SampleGatewayAttachment
+    Properties:
+      RouteTableId: !Ref SampleRouteTable
+      GatewayId: !Ref SampleInternetGateway
+      DestinationCidrBlock: 0.0.0.0/0
+  SampleSubnetRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref SampleRouteTable
+      SubnetId: !Ref SampleSubnet
+  MyInstance1:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0bf69afb300c322eb
+      InstanceType: t3.micro
+      KeyName: !Ref "KeyName"
+      SecurityGroups:
+        - !Ref HTTPSecurityGroup
+        - !Ref SSHSecurityGroup
+      Tags:
+        - Key: BeltExam1
+          Value: Day 5
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo su
+          yum update -y
+          yum install httpd -y
+          chmod -R 777 /var/www/html
+          cd /var/www/html
+          echo "<h1>Hello DevOps, My name is Muhannad Sinan from onsite cohort</h1>" > index.html
+          systemctl start httpd
+          systemctl enable httpd
+
+  MyInstance2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0bf69afb300c322eb
+      InstanceType: t3.micro
+      KeyName: !Ref "KeyName"
+      SecurityGroups:
+        - !Ref HTTPSecurityGroup
+        - !Ref SSHSecurityGroup
+      Tags:
+        - Key: BeltExam1
+          Value: Day 5
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo su
+          yum update -y
+          yum install httpd -y
+          chmod -R 777 /var/www/html
+          cd /var/www/html
+          echo "<h1>Hello DevOps, My name is Muhannad Sinan from onsite cohort</h1>" > index.html
+          systemctl start httpd
+          systemctl enable httpd
+
+  SSHSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: SSHSecurityGroupApache
+      GroupDescription: Enable SSH access to instances via port 22
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+
+  HTTPSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: HTTPSecurityGroupApache
+      GroupDescription: Allow HTTP traffics to instance in port 80
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+
+Outputs:
+  WebsiteURL1:
+    Value: !Sub
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt MyInstance1.PublicDnsName
+    Description: Application URL
+  WebsiteURL2:
+    Value: !Sub
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt MyInstance2.PublicDnsName
+    Description: Application URL

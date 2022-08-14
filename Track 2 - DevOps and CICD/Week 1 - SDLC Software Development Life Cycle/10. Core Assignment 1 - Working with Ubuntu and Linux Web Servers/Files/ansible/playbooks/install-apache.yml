@@ -1,0 +1,25 @@
+---
+  - hosts: amzservers
+    become: true
+    tasks:
+      - name: Installing apache in Amazon Linux servers
+        yum:
+          name: 
+            - httpd
+          state: present
+          update_cache: yes
+      - name: Ensure apache starts
+        service: name=httpd state=started enabled=yes 
+
+  - hosts: ubuntuservers
+    become: true
+    tasks:
+      - name: Installing apache in Ubuntu servers
+        apt:
+          name: 
+            - apache2
+            - php
+          state: present
+          update_cache: yes
+      - name: Ensure apache starts
+        service: name=apache2 state=started enabled=yes

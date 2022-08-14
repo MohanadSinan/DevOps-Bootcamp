@@ -1,0 +1,14 @@
+[all_servers:children]
+web_servers
+db_servers
+
+[web_servers]
+web1 ansible_host=157.175.228.203 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Pass@123
+web2 ansible_host=157.175.181.193 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Pass@234
+web3 ansible_host=157.175.83.168 ansible_connection=ssh ansible_user=Root ansible_ssh_pass=pass
+
+[db_servers]
+db1 ansible_host=15.185.64.183 ansible_connection=winrm ansible_user=Admin ansible_password=Password@123
+
+[web_servers:vars]
+ansible_ssh_private_key_file=/home/ec2-user/main.pem

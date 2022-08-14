@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  api:
+    container_name: English2Arabic_API
+    build: ./api
+    environment:
+      - CONNECTION_STRING=postgres://MuhannadSinan:DevOps@2022@db/English2Arabic
+    depends_on:
+      - db
+    networks:
+      - private-network
+      - public-network
+
+  webapp:
+    container_name: English2Arabic_WEB
+    build: ./web
+    environment:
+      - API_URL=http://api:3001/data
+    depends_on:
+      - api
+    ports:
+      - "80:3000"
+    networks:
+      - public-network
+
+  db:
+    image: postgres:11.2-alpine
+    container_name: English2Arabic_DB
+    environment:
+      POSTGRES_USER: MuhannadSinan
+      POSTGRES_PASSWORD: DevOps@2022
+      POSTGRES_DB: English2Arabic
+    volumes:
+      - ./sql_scripts/:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - private-network
+
+networks:
+  private-network:
+  public-network:
