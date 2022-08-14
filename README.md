@@ -51,7 +51,7 @@ In this coursework, successful completion of the course will enable students to 
 - [ ] Use appropriate Data Types, Typecasting, Read, Validate & Write
 - [ ] Loops, Arrays, Functions
 
-
+------
 
 ### Week 2
 
@@ -110,7 +110,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 
 - [ ] IAM (Security and Compliance)
 
-
+------
 
 ### Week 3
 
@@ -140,7 +140,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Promote application version to the next environment (Elastic Beanstalk)
 - [ ] Isolate functions of workflow and make it visual and intuitive (Step Function)
 
-
+------
 
 ### Week 4
 
@@ -171,7 +171,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Manage cross platforms using (Terraform)
 - [ ] Combine Packer, Ansible, and Terraform (Build, Configure and deploy)
 
-
+------
 
 ### Week 5
 
@@ -192,7 +192,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 
 - [ ] **Project-Based Belt Exam covering week 1-4**
 
-
+------
 
 ### Week 6
 
@@ -222,7 +222,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Integrate jenkins with AWS
 - [ ] Passwordless integration of Ansible and Jenkins
 
-
+------
 
 ### Week 7
 
@@ -249,7 +249,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Secure repositories and branches
 - [ ] Complete CI/CD pipeline
 
-
+------
 
 ### Week 8
 
@@ -274,7 +274,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Monitor systems, networks, and infrastructure using Nagios
 - [ ] Process complex data using ELK
 
-
+------
 
 ### Week 9
 
@@ -311,7 +311,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Orchestrate containers
 - [ ] Migrate data
 
-
+------
 
 ### Week 10
 
@@ -332,7 +332,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 
 - [ ] **Project-based Belt Exam covering week 6-9:** Native DevOps, automation, monitoring and docker
 
-
+------
 
 ### Week 11
 
@@ -362,7 +362,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Secure credentials
 - [ ] Ansible, Jenkins and K8s complete project with automated build
 
-
+------
 
 ### Week 12
 
@@ -384,7 +384,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 
 - [ ] Collaboration with security team for threats
 
-
+------
 
 ### Week 13
 
@@ -413,7 +413,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Deployment using Teamcity
 - [ ] Deploy NodeJs application
 
-
+------
 
 ### Week 14
 
@@ -438,7 +438,7 @@ EC2, AMIs, CloudWatch, VPC, Storage
 - [ ] Query data
 - [ ] Build applications that require low latency
 
-
+------
 
 ### Week 15
 
@@ -469,7 +469,7 @@ VM, Storage, Vnet, Networking, Azure DevOps
 - [ ] Create Storage Versioning (Storage Type Azure Blob) using terraform
 - [ ] Setup Azure CICD pipeline using Terraform
 
-
+------
 
 ### Week 16
 
